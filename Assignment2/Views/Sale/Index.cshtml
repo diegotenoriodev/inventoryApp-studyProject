@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Sale";
+}
+
+@section styles{
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.structure.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
+}
+
+<form ng-app="saleModule" ng-controller="saleController">
+    <div class="header">
+        <div class="col-md-6">
+            <h2>New Sale</h2>
+            Date of Purchase: <input type="date" class="form-control" ng-model="date" ng-init="date='@DateTime.Now.ToString("yyyy-MM-dd")'" id="date" />
+        </div>
+        <div class="col-md-6 text-right">
+            <h1>Total: {{getTotal() | currency}}</h1>
+            <input type="button" class="btn btn-default" ng-click="finishPurchase()" value="Finish Purchase" />
+            <input type="button" class="btn btn-danger" ng-click="clearPurchase()" value="Clear Purchase" />
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="text-center col-md-10">
+                <div ng-show="errorMessage != ''" class="col-md-10 user-message {{classError}}">
+                    {{errorMessage}}
+                </div>
+            </div>
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Final Price</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" ng-model="currentItem.IdProduct" id="IdProduct" disabled class="hidden" />
+                    <input type="text" placeholder="Product Name" ng-model="currentItem.productName" id="Name" class="product-name form-control" />
+                </td>
+                <td>
+                    <input type="number" ng-model="currentItem.QtdAvailable" class="hidden" id="QtdAvailable" />
+                    <input type="number" placeholder="Quantity" ng-model="currentItem.Qtd" class="qtd-value form-control" ng-change="updateTotal()" id="Qtd" />
+                </td>
+                <td>
+                    <input type="text" step="0.01" placeholder="Unit Price" ng-model="currentItem.price" class="qtd-value form-control" disabled ng-change="updateTotal()" id="Price" />
+                </td>
+                <td>
+                    <input type="number" step="0.01" placeholder="Total" ng-model="currentItem.total" class="qtd-value form-control" disabled id="total" />
+                </td>
+                <td>
+                    <button class="btn btn-default" id="addNewItem" ng-click="addItem()">{{actionText}}</button>
+                </td>
+            </tr>
+            <tr ng-repeat="item in items">
+                <td>{{item.productName}}</td>
+                <td>{{item.Qtd}}</td>
+                <td>{{item.price | currency}}</td>
+                <td>{{item.total | currency}}</td>
+                <td>
+                    <button class="btn btn-default" ng-click="editItem(item)">Edit</button>
+                    <button class="btn btn-danger" ng-click="removeItem(item)">Remove</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div ng-show="showLoadingMessage" class="full-screen">
+        <div ng-show="!isProcessing" class="process-finished">
+            <span>This purchase was finished successifully!</span>
+            <input type="button" value="Add a New Purchase" ng-click="clearPurchase()"/>
+        </div>
+        <div ng-show="isProcessing">
+            <span>Loading, please wait...</span>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
+    <script src="~/Scripts/app/sale.js"></script>
+
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/app/autocompleteSale.js"></script>
+}

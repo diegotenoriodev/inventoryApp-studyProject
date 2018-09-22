@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Assignment2.Models.ViewModel.InventoryProduct>
+@{
+    ViewBag.Title = "Inventory";
+}
+
+<h2>Inventory</h2>
+<div class="control-action">
+    @Html.ActionLink("New", "Create", null, new { @class = "btn btn-action btn-new" })
+</div>
+<div>
+    @if (!string.IsNullOrEmpty(@ViewBag.MessageSuccess))
+    {
+        <div class="user-message text-success">
+            @ViewBag.MessageSuccess
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(@ViewBag.MessageError))
+    {
+        <div class="user-message text-danger">
+            @ViewBag.MessageError
+        </div>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatePurchase)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriceAcquisition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qtd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdAvailable)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.DatePurchase.ToString("MM/dd/yyyy")</td>
+            <td>@item.PriceAcquisition.ToString("c")</td>
+            <td>@item.Price.ToString("c")</td>
+            <td>@item.Qtd</td>
+            <td>@item.QtdAvailable</td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            </td>
+        </tr>
+        }
+    </table>
+</div>

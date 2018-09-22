@@ -1,0 +1,17 @@
+﻿@model Assignment2.Models.ViewModel.ProductReport[]
+<div class="col-md-12 row">
+    <h2>@ViewBag.ReportName</h2>
+</div>
+<table class="table">
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Qty</td>
+        </tr>
+    }
+</table>

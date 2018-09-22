@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Reports";
+}
+
+<div class="row">
+    <h2>Reports</h2>
+</div>
+
+<div class="row">
+    <div class="side-nav col-md-2">
+        <ul>
+            <li>
+                @Ajax.ActionLink("Products Sold", "ProductsSold", new AjaxOptions { UpdateTargetId = "main" })
+            </li>
+            <li>
+                @Ajax.ActionLink("Products Purchased", "ProductsPurchased", new AjaxOptions { UpdateTargetId = "main" })
+            </li>
+            <li>
+                @Ajax.ActionLink("Available Quantity", "AvailableQuantity", new AjaxOptions { UpdateTargetId = "main" })
+            </li>
+            <li>
+                @Ajax.ActionLink("Average Profit", "AverageProfit", new AjaxOptions { UpdateTargetId = "main" })
+            </li>
+        </ul>
+    </div>
+
+    <div id="main" class="col-md-10">
+
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

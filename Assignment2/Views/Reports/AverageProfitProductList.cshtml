@@ -1,0 +1,23 @@
+﻿@model Assignment2.Models.ViewModel.AverageProfitProduct[]
+<div class="col-md-12 row">
+    <h2>@ViewBag.ReportName</h2>
+</div>
+<table class="table">
+    <tr>
+        <th>Product</th>
+        <th>Average Purchase Price</th>
+        <th>Average Sale Price</th>
+        <th>Quantity Sold</th>
+        <th>Average Profit</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@item.Name</td>
+        <td>@item.AveragePurchasePrice.ToString("c")</td>
+        <td>@item.AverageSalePrice.ToString("c")</td>
+        <td>@item.QttSold</td>
+        <td>@item.AverageProfit.ToString("c")</td>
+    </tr>
+    }
+</table>
