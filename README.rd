@@ -1,4 +1,4 @@
-#Inventory Control
+# Inventory Control
 
 This project was developed in order to apply some concepts in a real-world application.
 
